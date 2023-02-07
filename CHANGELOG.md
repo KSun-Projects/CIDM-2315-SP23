@@ -3,3 +3,5 @@
  -Uploaded Homework1.cs file
 1/30/2023:
  -Uploaded Homework2.cs file
+2/6/2023:
+ -Uploaded Homework3.cs file
