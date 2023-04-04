@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 26 & 27 Demonstration: Arrays</title>
+    <script type="text/javascript" src="script.js"></script>
+</head>
+<body>
+    <h1>Arrays</h1>
+    <p>Arrays are used to store multiple values in a single variable.</p>
+    <p>Array as a special variable example:</p>
+    <p>var fruit = ["apples", "oranges", "pears", "kiwi"]</p>
+    <p>The correct syntax for an array is:</p>
+    <p>var arrayName = [element0, element1, element2];</p>
+    <hr>
+    <p>If you have an array containing strings, you must use double quoatation marks around the elements as such:</p>
+    <p>var stringArray = ["string0", "string1", "string2"];</p>
+    <hr>
+    <p>The syntax for an array containing integers:</p>
+    <p>var integerArray = [1,2,3];</p>
+    <hr>
+    <p>The syntax for an array containing float:</p>
+    <p>var floatArray = [1.1,2.1,3.1];</p>
+    <hr>
+    <p>The syntax for an array containing boolean values:</p>
+    <p>var boolArray = [true, false, true, false];</p>
+    <hr>
+    <h2>Creating Arrays</h2>
+    <p>There are several ways to create a new array.</p>
+    <p>Here we have a variable named fruit. The array contains different types of fruit.</p>
+    <ol>
+        <li>Using the array literal is the easiest. The syntax is:<br>
+            var fruit = ["apples", "oranges", "pears", "kiwi"];
+        </li>
+        <li>You can create an empty array and then provide the elements: <br>
+            var fruit = [];<br>
+            fruit[0]= "apples";<br>
+            fruit[1]= "oranges";<br>
+            fruit[2]= "pears";<br>
+            fruit[3]= "kiwi";
+        </li>
+        <li>You can use the keyword <b>new</b> and Array and assign values to it:<br>
+            var fruit = new Array("apples", "oranges", "pears", "kiwi");  
+        </li>
+    </ol>
+    <hr>
+    <h2>Accessing Elements in an Array</h2>
+    <p>You access elements in an array by the index number. The first element in the array is at index number 0. The second element is at index 1 and so forth.</p>
+    <p>Let's list out the index numbers of our fruit elements.</p>
+    <p id="apple"></p>
+    <p id="orange"></p>
+    <p id="pear"></p>
+    <p id="kiwi"></p>
+    <script>
+        var fruit = ["apples", "oranges", "pears", "kiwi"];
+        document.getElementById("apple").innerHTML = "Apple: " + fruit.indexOf("apples");
+        document.getElementById("orange").innerHTML = "Orange: " + fruit.indexOf("oranges");
+        document.getElementById("pear").innerHTML = "Pear: " + fruit.indexOf("pears");
+        document.getElementById("kiwi").innerHTML = "Kiwi: " + fruit.indexOf("kiwi");
+    </script>
+    <hr>
+    <h2>Adding Elements to Our Array</h2>
+    <p>We can add elements to our array by using index[], push(), splice(), and unshift().</p>
+    <p style="color: blue;">Using the index number:</p>
+    Type a fruit: <input type="text" id="fruit"> <button type="button" onclick="indexToArray()">Add to Array!</button>
+    <p>Fruits in the array:</p>
+    <p id="indexFruit"></p>
+    <p style="color: blue;">Using the push() method</p>
+    Type a fruit: <input type="text" id="fruit1"> <button type="button" onclick="pushToArray()">Add to Array!</button>
+    <p>Fruits in the array:</p>
+    <p id="pushFruit"></p>
+    <p style="color: blue;">Using the splice() method</p>
+    Type a fruit: <input type="text" id="fruit2"> <button type="button" onclick="spliceToArray()">Add to Array!</button>
+    <p>Fruits in the array:</p>
+    <p id="spliceFruit"></p>
+  <!--   unshift() method adds element to beginning instead of end -->
+    <p style="color: blue;">Using the unshift() method</p>
+    Type a fruit: <input type="text" id="fruit3"> <button type="button" onclick="unshiftToArray()">Add to Array!</button>
+    <p>Fruits in the array:</p>
+    <p id="unshiftFruit"></p>
+    <script>
+        function indexToArray(){
+            fruit[fruit.length]= document.getElementById("fruit").value;
+            document.getElementById("indexFruit").innerHTML = fruit;
+        }
+        function pushToArray(){
+            fruit.push(document.getElementById("fruit1").value);
+            document.getElementById("pushFruit").innerHTML = fruit;
+        }
+        function spliceToArray(){
+            // fruit to add to array
+            var a = document.getElementById("fruit2").value;
+            // index to add the new fruit
+            var b = fruit.length;
+            // remove 0 elements before index b and insert a
+            fruit.splice(b, 0, a);
+            document.getElementById("spliceFruit").innerHTML = fruit;
+        }
+        function unshiftToArray(){
+            fruit.unshift(document.getElementById("fruit3").value);
+            document.getElementById("unshiftFruit").innerHTML = fruit;
+        }
+    </script>
+    <hr>
+    <h2>Removing Elements to Our Array</h2>
+    <button type="button" onclick="refreshNumbers()">Refresh Array!</button>
+    <p>We can remove elements to our array by using index[], splice(), pop(), and shift().</p>
+    <p style="color: blue;">Using the index number and splice():</p>
+    <p id="length"></p>
+    Enter number: <input type="text" id="fruit5"> <button type="button" onclick="indexToDelete()">Delete from Array!</button>
+    <p id="deleted"></p>
+    <p>Fruits in the array:</p>
+    <p id="indexDelete"></p>
+    <p style="color: blue;">Using the pop() alone will remove the last element in an array:</p>
+    <button type="button" onclick="pop()">Using pop() method!</button>
+    <p id="popFruit"></p>
+    <p style="color: blue;">Using the shift() will remove the first element in an array:</p>
+    <button type="button" onclick="shift()">Using shift() method!</button>
+    <p id="shiftFruit"></p>
+    <script>     
+        function refreshNumbers(){
+            document.getElementById("length").innerHTML = "There are  " + fruit.length +" elements in the array. Please enter a number from 0 to "+ (fruit.length-1) + ".";
+        }
+        
+        function indexToDelete(){
+            var selectedFruit=fruit[document.getElementById("fruit5").value];
+            if(document.getElementById("fruit5").value<=(fruit.length-1) && document.getElementById("fruit5").value>=0){
+                fruit.splice(document.getElementById("fruit5").value, 1)
+            }
+            else{
+                alert("You did not enter an acceptable number.")
+            }
+            document.getElementById("deleted").innerHTML = "You selected " + selectedFruit + " to delete.";
+            document.getElementById("indexDelete").innerHTML = fruit;
+        }
+        function pop(){
+            fruit.pop();
+            document.getElementById("popFruit").innerHTML = fruit;
+        }
+        function shift(){
+            fruit.shift();
+            document.getElementById("shiftFruit").innerHTML = fruit;
+        }
+    </script>
+    <hr>
+    <h2>Let's have some more fun!</h2>
+    <p>You can also reverse an order of an array by using the .reverse() method!</p>
+    <button type="button" onclick="reverseArray()">Using reverse() method!</button>
+    <p id="reverseFruit"></p>
+    <p>Let's sort the array using the .sort() method!</p>
+    <button type="button" onclick="sortArray()">Using sort() method!</button>
+    <p id="sortFruit"></p>
+    <p>Let's sort numbers! An array was created with the following numbers:1,2,3,4,10,45,23,90</p>
+    <button type="button" onclick="sortNums()">Sorting numbers using sort() method!</button>
+    <p id="sortNums"></p>
+    <p id="warning" style = "color: red;"></p>
+    <p>Let's try sorting numbers again.</p>
+    <button type="button" onclick="correctNums()">Correctly sorting numbers!</button>
+    <p id="correctNums"></p>
+    <script>
+        function reverseArray(){
+            document.getElementById("reverseFruit").innerHTML = fruit.reverse();
+        }
+        function sortArray(){
+            document.getElementById("sortFruit").innerHTML = fruit.sort();
+        }
+        var numArray = [1,2,3,4,10,45,23,90]
+        function sortNums(){
+            document.getElementById("sortNums").innerHTML = numArray.sort();
+            document.getElementById("warning").innerHTML = "Oh no! How come the numbers aren't sorted?"
+        }
+        function correctNums(){
+            document.getElementById("correctNums").innerHTML = numArray.sort((a,b) => a-b);
+        }
+    </script>
+    <footer>
+        <a href="loops.html">Loops</a>
+    </footer>
+</body>
+</html>
